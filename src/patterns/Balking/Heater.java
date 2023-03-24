@@ -1,17 +1,10 @@
-package patterns;
-
-public class Balking {
-    public static void main(String[] args) {
-        Heater heater=new Heater();
-    }
-}
-
+package patterns.Balking;
 class Heater{
-    private boolean heatTurnedOn=false;
+     private boolean heatTurnedOn=false;
 
     public Heater(){
-        new Thread( new Sensor1(this)).start();
-        new Thread( new Sensor2(this)).start();
+        new Thread(new Sensor1(this)).start();
+        new Thread(new Sensor2(this)).start();
     }
 
     void heatDo() throws InterruptedException {
@@ -34,22 +27,22 @@ class Heater{
     }
 
 
-    private class Sensor1 implements Runnable{
+    class Sensor1 implements Runnable{
         Heater heater;
         public Sensor1(Heater heater) {this.heater = heater;}
         @Override
         public void run() {
             for (int i = 0; i < 100; i++)try {heater.heatDo();
-            Thread.sleep(1000);} catch (InterruptedException e) {}
+                Thread.sleep(1000);} catch (InterruptedException e) {}
         }
     }
-   private class Sensor2 implements Runnable {
+    private class Sensor2 implements Runnable {
         Heater heater;
         public Sensor2(Heater heater) {this.heater = heater;}
         @Override
         public void run() {
             for (int i = 0; i < 100; i++)try {heater.heatDo();
-            Thread.sleep(1000);} catch (InterruptedException e) {}
+                Thread.sleep(1000);} catch (InterruptedException e) {}
         }
     }
 }
